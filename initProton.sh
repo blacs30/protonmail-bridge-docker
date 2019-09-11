@@ -3,7 +3,7 @@
 set -eufo pipefail
 
 BRIDGE=protonmail-bridge
-
+PRINT_INFO=${PRINT_INFO-""}
 #### INIT
 
 if [ -n "$PASS_FILE" ]; then
@@ -35,9 +35,11 @@ EOF
   touch ./initialized
 fi
 
-$BRIDGE --cli <<EOF | egrep '(Username|Password)' | sort -ru
+if [ -n "$PRINT_INFO" ]; then
+  $BRIDGE --cli <<EOF | egrep '(Username|Password)' | sort -ru
 info
 EOF
+fi
 
 # socat will make the conn appear to come from 127.0.0.1
 # ProtonMail Bridge currently expects that.
