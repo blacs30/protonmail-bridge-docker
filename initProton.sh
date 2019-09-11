@@ -2,20 +2,35 @@
 
 set -eufo pipefail
 
-BRIDGE=Desktop-Bridge
+BRIDGE=protonmail-bridge
 
 #### INIT
+
+if [ -n "$PASS_FILE" ]; then
+    PASSWORD=$(cat $PASS_FILE)
+fi
 
 if ! [ -f ./initialized ]; then
 
   gpg --generate-key --batch /gpgparams
   pass init pass-key
 
-  $BRIDGE --cli <<EOF
+
+  if [ -n "$RUN_2FA_LOGIN" ]; then
+      $BRIDGE --cli <<EOF
+login
+$EMAIL
+$PASSWORD
+$MFA_CODE
+EOF
+  else
+
+      $BRIDGE --cli <<EOF
 login
 $EMAIL
 $PASSWORD
 EOF
+  fi
 
   touch ./initialized
 fi
@@ -27,8 +42,8 @@ EOF
 # socat will make the conn appear to come from 127.0.0.1
 # ProtonMail Bridge currently expects that.
 # It also allows us to bind to the real ports :)
-socat TCP-LISTEN:25,fork TCP:127.0.0.1:1025 &
-socat TCP-LISTEN:143,fork TCP:127.0.0.1:1143 &
+socat TCP-LISTEN:$SMTP_PORT,fork TCP:127.0.0.1:1025 &
+socat TCP-LISTEN:$IMAP_PORT,fork TCP:127.0.0.1:1143 &
 
 # Fake a terminal, so it does not quit because of EOF...
 rm -f faketty
