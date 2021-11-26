@@ -28,7 +28,7 @@ ENV PM_VERSION 1.8.10
 ENV PM_RELEASE 1
 ENV SHA256 48f7a2f86bb6a7bda946c59e51529e1375fb86d603cd343cf94275febc9f85ee
 RUN set -x; \
-        curl -o bridge.deb -SL https://protonmail.com/download/protonmail-bridge_${PM_VERSION}-${PM_RELEASE}_amd64.deb \
+        curl -o bridge.deb -SL https://protonmail.com/download/bridge/protonmail-bridge_${PM_VERSION}-${PM_RELEASE}_amd64.deb \
   && echo "$SHA256 bridge.deb" | sha256sum -c - \
         && dpkg --force-depends -i bridge.deb \
         && apt-get update \
