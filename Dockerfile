@@ -24,9 +24,9 @@ RUN set -x; \
             libcap2-bin
 
 # install protonmail bridge
-ENV PM_VERSION 1.8.10
+ENV PM_VERSION 1.8.12
 ENV PM_RELEASE 1
-ENV SHA256 48f7a2f86bb6a7bda946c59e51529e1375fb86d603cd343cf94275febc9f85ee
+ENV SHA256 90eff7d27e4835e3a204019cafa7062467ec45688a1a6d407896976bdeb1f8ea
 RUN set -x; \
         curl -o bridge.deb -SL https://protonmail.com/download/bridge/protonmail-bridge_${PM_VERSION}-${PM_RELEASE}_amd64.deb \
   && echo "$SHA256 bridge.deb" | sha256sum -c - \

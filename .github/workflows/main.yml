@@ -2,6 +2,9 @@
 
 name: CI
 
+env:
+  PM_VERSION: 1.8.12
+
 # Controls when the action will run.
 on:
   workflow_dispatch:
@@ -28,7 +31,7 @@ jobs:
 
       - name: docker build ci
         run: |
-          docker build . -t blacs30/protonmail-bridge-docker:latest -t blacs30/protonmail-bridge-docker:${{ github.sha }}
+          docker build . -t blacs30/protonmail-bridge-docker:latest -t blacs30/protonmail-bridge-docker:${{ github.sha }} -t blacs30/protonmail-bridge-docker:${{ env.PM_VERSION }}
 
       - name: docker push
         run: |
