@@ -41,11 +41,17 @@ RUN apt-get update && \
     pass \
     socat
 
+RUN useradd -ms /bin/bash proton
+RUN setcap 'cap_net_bind_service=+ep' /usr/bin/socat
+
 # Copy Binary From Build Stage
 COPY --from=build /build/proton-bridge/proton-bridge /proton/
 
 # Copy scripts
 COPY gpgparams entrypoint.sh login.sh /proton/
+
+USER proton
+WORKDIR /home/proton
 
 # Start Protonmail-Bridge
 ENTRYPOINT ["bash", "/proton/entrypoint.sh"]
