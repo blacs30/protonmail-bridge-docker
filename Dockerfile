@@ -42,7 +42,7 @@ RUN apt-get update && \
     socat
 
 RUN useradd -ms /bin/bash proton
-RUN setcap 'cap_net_bind_service=+ep' /usr/bin/socat
+#RUN setcap 'cap_net_bind_service=+ep' /usr/bin/socat
 
 # Copy Binary From Build Stage
 COPY --from=build /build/proton-bridge/proton-bridge /proton/
