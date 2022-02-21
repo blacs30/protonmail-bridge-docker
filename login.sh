@@ -6,7 +6,7 @@ expect eof
 spawn pass init pass-key
 expect eof
 
-if { $env(2FA_CODE) == "false" } {
+if { $env(OTP_CODE) == "false" } {
     # Login
     spawn /proton/proton-bridge --cli;
     expect ">>> "
@@ -32,7 +32,7 @@ if { $env(2FA_CODE) == "false" } {
     expect "Password:"
     send "$env(PASSWORD)\r"
     expect "Two factor code:"
-    send "$env(2FA_CODE)\r"
+    send "$env(OTP_CODE)\r"
     expect ">>> "
     send "list\r"
     expect ">>> "
