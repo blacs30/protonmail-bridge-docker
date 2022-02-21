@@ -2,9 +2,6 @@
 
 name: CI
 
-env:
-  PM_VERSION: 1.8.12
-
 # Controls when the action will run.
 on:
   workflow_dispatch:
@@ -31,15 +28,8 @@ jobs:
 
       - name: docker build ci
         run: |
-          docker build . -t blacs30/protonmail-bridge-docker:latest -t blacs30/protonmail-bridge-docker:${{ github.sha }} -t blacs30/protonmail-bridge-docker:${{ env.PM_VERSION }}
+          docker build . -t blacs30/protonmail-bridge-docker:latest -t blacs30/protonmail-bridge-docker:${{ github.sha }} -t blacs30/protonmail-bridge-docker:$(cat VERSION)
 
       - name: docker push
         run: |
           docker push -a blacs30/protonmail-bridge-docker
-
-          if [ $GITHUB_REF == "refs/heads/develop" ]; then
-            echo "::set-output name=matrix::{\"include\":[{\"cluster\":\"tooling-west-1\",\"environment\":\"dev\"}]}"
-          fi
-          if [ "$GITHUB_REF" == "refs/heads/master" ]; then
-            echo "::set-output name=matrix::{\"include\":[{\"cluster\":\"tooling-west-1\",\"environment\":\"prod\"}]}"
-          fi
