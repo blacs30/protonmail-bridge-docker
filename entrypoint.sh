@@ -19,28 +19,6 @@ if [ $LOGIN == "false" ]; then
         
     fi
 
-else
-  
-    if [ $OTP_CODE == "false" ]; then
-        /proton/proton-bridge --cli <<EOF
-login
-$EMAIL
-$PASSWORD
-list
-info
-exit
-EOF
-  
-  else
-
-      /proton/proton-bridge --cli <<EOF
-login
-$EMAIL
-$PASSWORD
-$OTP_CODE
-list
-info
-exit
-EOF
-    fi 
+else 
+    expect /proton/login.sh
 fi
