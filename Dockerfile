@@ -40,7 +40,11 @@ RUN apt-get update && \
     libsecret-1-0 \
     pass \
     socat \
-    curl
+    curl \
+    libcap2-bin \
+    gnupg \
+    grep 
+
 
 RUN useradd -ms /bin/bash proton
 #RUN setcap 'cap_net_bind_service=+ep' /usr/bin/socat
