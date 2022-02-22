@@ -39,7 +39,8 @@ RUN apt-get update && \
     expect \
     libsecret-1-0 \
     pass \
-    socat
+    socat \
+    curl
 
 RUN useradd -ms /bin/bash proton
 #RUN setcap 'cap_net_bind_service=+ep' /usr/bin/socat
@@ -49,10 +50,10 @@ RUN useradd -ms /bin/bash proton
 
 # install protonmail bridge
 ENV BRIDGE_VERSION=2.1.1
-ENV BRIDGE__RELEASE=1
+ENV BRIDGE_RELEASE=1
 ENV SHA256=9c6c1daa0dac1835e72c886064b0e9a38749f96bdf47719f08eaac787d43bca7
 RUN set -x; \
-        curl -o bridge.deb -SL https://protonmail.com/download/bridge/protonmail-bridge_${BRIDGE_VERSION}-${BRIDGE__RELEASE}_amd64.deb \
+        curl -o bridge.deb -SL https://protonmail.com/download/bridge/protonmail-bridge_${BRIDGE_VERSION}-${BRIDGE_RELEASE}_amd64.deb \
   && echo "$SHA256 bridge.deb" | sha256sum -c - \
         && dpkg --force-depends -i bridge.deb \
         && apt-get update \
