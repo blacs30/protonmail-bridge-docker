@@ -42,5 +42,5 @@ list
 info
 exit
 EOF
-
+    fi 
 fi
