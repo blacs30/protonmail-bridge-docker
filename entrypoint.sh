@@ -11,11 +11,11 @@ if [ $LOGIN == "false" ]; then
 
     if [ $INTERACTIVE == "false" ]; then
         
-        /proton/proton-bridge --noninteractive
+        /usr/bin/protonmail-bridge --noninteractive
     
     else
 
-        /proton/proton-bridge --cli
+        /usr/bin/protonmail-bridge --cli
         
     fi
 

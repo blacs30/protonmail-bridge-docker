@@ -8,7 +8,7 @@ expect eof
 
 if { $env(OTP_CODE) == "false" } {
     # Login
-    spawn /proton/proton-bridge --cli;
+    spawn /usr/bin/protonmail-bridge --cli;
     expect ">>> "
     send "login\r"
     expect "Username:"
@@ -24,7 +24,7 @@ if { $env(OTP_CODE) == "false" } {
     expect eof
 } else {
     # Login
-    spawn /proton/proton-bridge --cli;
+    spawn /usr/bin/protonmail-bridge --cli;
     expect ">>> "
     send "login\r"
     expect "Username:"
