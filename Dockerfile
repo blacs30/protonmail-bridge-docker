@@ -42,7 +42,8 @@ RUN apt-get update && \
     socat \
     libcap2-bin \
     gnupg \
-    grep 
+    grep \
+    wget
 
 
 RUN useradd -ms /bin/bash proton
