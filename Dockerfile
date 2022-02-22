@@ -43,7 +43,8 @@ RUN apt-get update && \
     libcap2-bin \
     gnupg \
     grep \
-    wget
+    wget \
+    ca-certificates
 
 
 RUN useradd -ms /bin/bash proton
