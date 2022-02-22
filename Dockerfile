@@ -54,9 +54,11 @@ RUN useradd -ms /bin/bash proton
 # COPY --from=build /build/proton-bridge/proton-bridge /proton/
 
 # install protonmail bridge
-ENV BRIDGE_VERSION=2.1.1
+ENV BRIDGE_VERSION=1.8.10
+#ENV BRIDGE_VERSION=2.1.1
 ENV BRIDGE_RELEASE=1
-ENV SHA256=9c6c1daa0dac1835e72c886064b0e9a38749f96bdf47719f08eaac787d43bca7
+#ENV SHA256=9c6c1daa0dac1835e72c886064b0e9a38749f96bdf47719f08eaac787d43bca7
+ENV SHA256=48f7a2f86bb6a7bda946c59e51529e1375fb86d603cd343cf94275febc9f85ee
 RUN set -x; \
         wget https://protonmail.com/download/bridge/protonmail-bridge_${BRIDGE_VERSION}-${BRIDGE_RELEASE}_amd64.deb \
   && mv protonmail-bridge_${BRIDGE_VERSION}-${BRIDGE_RELEASE}_amd64.deb bridge.deb \
